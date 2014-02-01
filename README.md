@@ -16,8 +16,10 @@
 
 # use the service
 
+```html
     <script type="text/javascript" src="http://SERVER_NAME/js/speakClient.js"></script>
 
-	<script type="text/javascript">
-		speak({text:'Hello world!', autoplay:true, server:'SERVER_NAME'});
-	</script>
+    <script type="text/javascript">
+        speak({text:'Hello world!', autoplay:true, server:'SERVER_NAME'});
+    </script>
+```
