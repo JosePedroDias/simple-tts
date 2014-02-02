@@ -51,9 +51,12 @@
         }
 
         var api = {
-            options:    o,
-            play:       function() {
+            options: o,
+            play: function() {
                 audioEl.play();
+            },
+            pause: function() {
+                audioEl.pause();
             }
         };
 

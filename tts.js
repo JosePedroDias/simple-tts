@@ -55,6 +55,9 @@
             '|',
             converter,
             '--quiet',
+            '-h', // quality
+            '-b', 32, // bit rate
+            '-m', 'm', // mono
             '-'
         ].join(' ');
 
