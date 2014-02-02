@@ -30,8 +30,8 @@ var getMimeType = function(ext) {
     switch (ext) {
         case 'html': return 'text/html';
         case 'css':  return 'text/css';
-        case 'js':   return 'text/js';
-        case 'mp3':  return 'audio/mpeg3';
+        case 'js':   return 'text/javascript';
+        case 'mp3':  return 'audio/mpeg';
         case 'ogg':  return 'audio/ogg';
         default:
             return 'text/plain';
@@ -62,15 +62,15 @@ http.createServer(function(request, response) {
         delete o.text;
 
         for (var k in o) {
-            if (!o.hasOwnProperty(k)) { continue;   }
-            if (['lang', 'format'].indexOf(k) !== -1) { continue;   }
+            if (!o.hasOwnProperty(k)) { continue; }
+            if (['lang', 'format'].indexOf(k) !== -1) { continue; }
             o[k] = parseInt(o[k], 10);
         }
 
         console.log('text:       "' + text + '"');
         console.log('parameters: ' + util.inspect(o));
 
-        response.writeHead(200, {'Content-Type': o.format === 'mp3' ? 'audio/mpeg' : 'audio/ogg'});
+        response.writeHead(200, {'Content-Type': getMimeType(o.format)});
         o.stream = response;
         
         speak(text, o);
