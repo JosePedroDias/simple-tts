@@ -17,9 +17,14 @@
 # use the service
 
 ```html
-    <script type="text/javascript" src="http://SERVER_NAME/js/speakClient.js"></script>
+    <script type="text/javascript" src="http://SERVER_NAME:SERVER_PORT/js/speakClient.js"></script>
 
     <script type="text/javascript">
-        speak({text:'Hello world!', autoplay:true, server:'SERVER_NAME'});
+        speak({text:'Hello world!', autoplay:true, server:'SERVER_NAME:SERVER_PORT'});
     </script>
 ```
+
+
+## speakClient API:
+
+see [API.md](https://github.com/JosePedroDias/simple-tts/blob/master/API.md)

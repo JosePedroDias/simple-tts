@@ -45,7 +45,7 @@ http.createServer(function(request, response) {
     var uri = u.pathname;
     var filename = path.join(process.cwd(), 'static', uri);
     
-    console.log('uri:', uri);
+    //console.log('uri:', uri);
 
     if (uri === '/') {
         response.writeHead(302, {
@@ -67,8 +67,8 @@ http.createServer(function(request, response) {
             o[k] = parseInt(o[k], 10);
         }
 
-        console.log('text:       "' + text + '"');
-        console.log('parameters: ' + util.inspect(o));
+        //console.log('text:       "' + text + '"');
+        //console.log('parameters: ' + util.inspect(o));
 
         response.writeHead(200, {'Content-Type': getMimeType(o.format)});
         o.stream = response;

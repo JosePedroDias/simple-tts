@@ -3,9 +3,8 @@
     'use strict';
 
     /*jshint browser:true, eqeqeq:true, undef:true, curly:true, laxbreak:true, forin:false, smarttabs:true */
-    /*global SAPO:false, s$:false */
-    
-    
+ 
+
 
     var objectToQueryString = function(o) {
         var parts = [];
@@ -16,26 +15,34 @@
         return parts.join('&');
     };
 
-    var geckoRgx = /firefox/gi;
-    var useOgg = geckoRgx.test(navigator.userAgent);
+
+
+    var supportsMp3 = (function() {
+        var aEl = document.createElement('audio');
+        return !!(aEl.canPlayType && aEl.canPlayType('audio/mpeg').replace(/no/, ''));
+    })();
+
+
 
     /**
-     * @author jose.p.dias AT co.sapo.pt
+     * @function speak
+     * @param {Object}    o
+     * @param {String}    o.text            text to speak
+     *
+     * @param {Number}   [o.amplitude=200]  espeak parameter. amplitude ~ volume.
+     * @param {Number}   [o.pitch=50]       espeak parameter. voice pitch.
+     * @param {Number}   [o.speed=130]      espeak parameter. narration speed.
+     * @param {Number}   [o.wordgap=3]      espeak parameter. time between words.
+
+     * @param {Boolean}  [o.autoplay=false] if trueish, sample is played as soon as it's available
+     * @param {Function} [o.onReady]        called when playback can start
+     * @param {Function} [o.onDone]         called when playback ended
+     *
+     * @returns {Object} The returned object has the following interface:
      * 
-     * @function {Object} ?
-     * @param {Object} o
-     * @... {           String}     text
-     * @... {optional   Number}     amplitude   espeak parameter. default is 100
-     * @... {optional   Number}     pitch       espeak parameter. default is 50
-     * @... {optional   Number}     speed       espeak parameter. default is 175
-     * @... {optional   Number}     wordgap     espeak parameter. default is 0
-     * @... {optional   Boolean}    autoplay    if trueish, sample is played as soon as it's available. default is false
-     * @... {optional   Function}   onReady     called when playback can start
-     * @... {optional   Function}   onDone      called when playback ended
-     * 
-     * The returned object has the following interface:
      * {Object}     options (the hash of primitive parameters passed in)
      * {Function}   play
+     * {Function}   pause
      */
     window.speak = function(o) {
         var audioEl = document.createElement('audio');
@@ -72,9 +79,11 @@
             delete o.autoplay;
         }
 
+        o.format = supportsMp3 ? 'mp3' : 'ogg';
+
         var sourceEl = document.createElement('source');
         sourceEl.setAttribute('src', server + '/speak?' + objectToQueryString(o));
-        sourceEl.setAttribute('type', useOgg ? 'audio/ogg' : 'audio/mpeg');
+        sourceEl.setAttribute('type', supportsMp3 ? 'audio/mpeg' : 'audio/ogg');
         audioEl.appendChild(sourceEl);
 
         if (autoplay) {

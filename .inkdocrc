@@ -1,0 +1,12 @@
+{
+    "outputDir":  ".",
+    "sourceDir":  "static/js",
+    "sourceFiles": [
+        "*"
+    ],
+    "template": "markdown",
+    "markupFile": "API.md",
+    "skipIdentifiers": true,
+    "skipJSON": true,
+    "skipInkdocPromotion": true
+}

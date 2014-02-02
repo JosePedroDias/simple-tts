@@ -18,10 +18,10 @@
         if (!('lang'   in o)) { o.lang   = 'en'; }
         if (!('format' in o)) { o.format = 'mp3'; }
 
-        if (!('amplitude' in o)) { o.amplitude = 100; } else { o.amplitude = parseInt(o.amplitude, 10); }
+        if (!('amplitude' in o)) { o.amplitude = 200; } else { o.amplitude = parseInt(o.amplitude, 10); }
         if (!('pitch'     in o)) { o.pitch     =  50; } else { o.pitch     = parseInt(o.pitch,     10); }
-        if (!('speed'     in o)) { o.speed     = 175; } else { o.speed     = parseInt(o.speed,     10); }
-        if (!('wordgap'   in o)) { o.wordgap   =   0; } else { o.wordgap   = parseInt(o.wordgap,   10); }
+        if (!('speed'     in o)) { o.speed     = 130; } else { o.speed     = parseInt(o.speed,     10); }
+        if (!('wordgap'   in o)) { o.wordgap   =   3; } else { o.wordgap   = parseInt(o.wordgap,   10); }
 
         var f;
         
@@ -51,15 +51,27 @@
             '-a', o.amplitude,
             '-p', o.pitch,
             '-s', o.speed,
-            '-l', o.wordgap,
+            '-g', o.wordgap,
             '|',
             converter,
             '--quiet',
-            '-h', // quality
-            '-b', 32, // bit rate
-            '-m', 'm', // mono
-            '-'
-        ].join(' ');
+            '-b', 16, // bit rate
+        ];
+        if (o.format === 'mp3') {
+            cmd = cmd.concat([
+                '-h', // quality
+                //'-m', 'm', // mono
+            ]);
+        }
+        else {
+            cmd = cmd.concat([
+                '-q', -1, // quality
+                //'--downmix', // mono
+            ]);
+        }
+
+        cmd.push('-');
+        cmd = cmd.join(' ');
 
         //console.log(cmd);
 
