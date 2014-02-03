@@ -1,16 +1,18 @@
-# install dependencies
+# for direct node usage
+
+## install dependencies
     
 in debian-like linuxes such as ubuntu:
 
     sudo apt-get install espeak lame vorbis-tools
 
 
-# install in node
+## install in node
 
     npm install simple-tts
 
 
-# use in nodejs
+## use in node
 
 ```javascript
 var speak = require('simple-tts');
@@ -22,31 +24,40 @@ speak('hello world', {stream:response});
 
 ```
 
-# install and run (for demo and for serving via HTTP)
+
+----
+
+
+# for checking the server and js examples
+
+## install and run (for demo and serving via HTTP)
 
     git clone git@github.com:JosePedroDias/simple-tts.git
 
     cd simple-tts
 
-    node speakServer 8888 &
+    node simple-tts-server &
 
 
-# demo
+## demo
 
     go to http://127.0.0.1:8888
 
 
-# use as a remote service
+## use as a remote service
 
 ```html
-    <script type="text/javascript" src="http://SERVER_NAME:SERVER_PORT/js/speakClient.js"></script>
+    <script type="text/javascript" src="http://SERVER_NAME:SERVER_PORT/js/simple-tts-client.js"></script>
 
     <script type="text/javascript">
-        speak({text:'Hello world!', autoplay:true, server:'SERVER_NAME:SERVER_PORT'});
+        speak('Hello world!');
     </script>
 ```
 
 
-## speakClient API:
+----
+
+
+# Documentation:
 
 see [API.md](https://github.com/JosePedroDias/simple-tts/blob/master/API.md)
