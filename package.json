@@ -1,0 +1,26 @@
+{
+  "name": "simple-tts",
+  "version": "0.1.0",
+  "description": "simple TTS API via espeak",
+  "main": "lib/simple-tts.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JosePedroDias/simple-tts.git"
+  },
+  "keywords": [
+    "tts",
+    "espeak",
+    "text-to-speech"
+  ],
+  "author": {
+    "name":  "José Pedro Dias",
+    "email": "jose.pedro.dias@gmail.com",
+    "url":   "http://josepedrodias.com/"
+  },
+  "engines": {
+    "node": ">= 0.8.x"
+  },
+  "dependencies": {
+  },
+  "license": "MIT"
+}

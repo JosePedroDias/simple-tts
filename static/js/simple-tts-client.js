@@ -23,28 +23,36 @@
     })();
 
 
+    /**
+     * @module client_API
+     */
 
     /**
      * @function speak
+     *
+     * @param {String}    text              text to speak
+     *
      * @param {Object}    o
-     * @param {String}    o.text            text to speak
      *
      * @param {Number}   [o.amplitude=200]  espeak parameter. amplitude ~ volume.
-     * @param {Number}   [o.pitch=50]       espeak parameter. voice pitch.
-     * @param {Number}   [o.speed=130]      espeak parameter. narration speed.
+     * @param {Number}   [o.pitch=40]       espeak parameter. voice pitch.
+     * @param {Number}   [o.speed=150]      espeak parameter. narration speed.
      * @param {Number}   [o.wordgap=3]      espeak parameter. time between words.
-
-     * @param {Boolean}  [o.autoplay=false] if trueish, sample is played as soon as it's available
+     *
+     * @param {Boolean}  [o.autoplay=true]  if trueish, sample is played as soon as it's available
      * @param {Function} [o.onReady]        called when playback can start
      * @param {Function} [o.onDone]         called when playback ended
      *
-     * @returns {Object} The returned object has the following interface:
-     * 
-     * {Object}     options (the hash of primitive parameters passed in)
-     * {Function}   play
-     * {Function}   pause
+     * @returns {Object} The returned object has the following interface:  
+     *   {Object}   options (the hash of primitive parameters passed in)
+     *   {Function} play
+     *   {Function} pause
      */
-    window.speak = function(o) {
+    window.speak = function(text, o) {
+        if (!o) { o = {}; }
+
+        o.text = text;
+
         var audioEl = document.createElement('audio');
 
         if ('onReady' in o) {
@@ -57,23 +65,13 @@
             delete o.onDone;
         }
 
-        var api = {
-            options: o,
-            play: function() {
-                audioEl.play();
-            },
-            pause: function() {
-                audioEl.pause();
-            }
-        };
-
         var server = '';
         if ('server' in o) {
             server = o.server;
             delete o.server;
         }
 
-        var autoplay = false;
+        var autoplay = true;
         if ('autoplay' in o) {
             autoplay = !!o.autoplay;
             delete o.autoplay;
@@ -90,7 +88,11 @@
             audioEl.play();
         }
 
-        return api;
+        return {
+            options: o,
+            play:    function() { audioEl.play();  },
+            pause:   function() { audioEl.pause(); }
+        };
     };
     
 })(window, undefined);

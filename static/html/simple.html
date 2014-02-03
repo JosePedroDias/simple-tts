@@ -4,18 +4,18 @@
     <head>
         <meta charset="utf-8"/>
 
-        <title>espeak on the server w/ node (simple usage)</title>
+        <title>simple TTS - simple</title>
         
-        <link type="text/css" rel="stylesheet" href="/css/speak.css" />
+        <link type="text/css" rel="stylesheet" href="/css/main.css" />
 
-        <script type="text/javascript" src="/js/speakClient.js"></script>
+        <script type="text/javascript" src="/js/simple-tts-client.js"></script>
     </head>
     
     <body>
-        <h1>speak simple commands</h1>
+        <h1>simple TTS - simple</h1>
 
         <!-- just call it like this for static content -->
-        <button onclick="speak({text:'Hello world!', autoplay:true});">Hello world!</button>
+        <button onclick="speak('Hello world!');">Hello world!</button>
 
         <!-- or glue it with some JS for awesome results -->
         <p>
@@ -36,7 +36,7 @@
             if (el.nodeName.toLowerCase() !== 'button') { return; }
             var text = el.innerHTML;
             var lang = el.getAttribute('data-lang') || 'en';
-            speak({text:text, autoplay:true, lang:lang});
+            speak(text, {lang:lang});
         });
     </script>
 </html>

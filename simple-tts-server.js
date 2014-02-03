@@ -1,9 +1,15 @@
+'use strict';
+
+/**
+ * @module HTTP_API
+ */
+
 var http    = require('http'),
     url     = require('url'),
     path    = require('path'),
     fs      = require('fs'),
     util    = require('util'),
-    speak   = require('./tts');
+    speak   = require('./lib/simple-tts');
 
 
 
@@ -11,19 +17,6 @@ var port = process.argv.pop();
 port = parseInt(port, 10);
 if (isNaN(port)) { port = 8888; }
 
-
-
-/**
- * @author jose.p.dias AT co.sapo.pt
- * 
- * sudo apt-get install espeak lame vorbis-tools
- *
- * TODOs
- * - validate text length
- * - validate espeak options
- * - support other voices (pt...)
- * - cache?
- */
 
 
 var getMimeType = function(ext) {
@@ -55,6 +48,20 @@ http.createServer(function(request, response) {
         return;
     }
     
+    /**
+     * GET /speak
+     *
+     * supported query arguments:
+     * * text
+     * * format
+     * * lang
+     * * amplitude
+     * * pitch
+     * * speed
+     * * wordgap
+     * 
+     * returns the audio stream
+     */
     if (uri === '/speak') {
         var o = u.query;
 
@@ -111,4 +118,4 @@ http.createServer(function(request, response) {
     
 }).listen(port);
 
-console.log('Serving speakServer from port ' + port + '...');
+console.log('Serving simple-tts-server on port ' + port + '...');

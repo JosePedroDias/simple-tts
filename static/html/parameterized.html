@@ -4,11 +4,11 @@
     <head>
         <meta charset="utf-8"/>
 
-        <title>espeak on the server w/ node</title>
+        <title>simple TTS - parameterized</title>
         
-        <link type="text/css" rel="stylesheet" href="/css/speak.css" />
+        <link type="text/css" rel="stylesheet" href="/css/main.css" />
 
-        <script type="text/javascript" src="/js/speakClient.js"></script>
+        <script type="text/javascript" src="/js/simple-tts-client.js"></script>
         
         <script type="text/javascript">
             var s$ = function(id) {
@@ -36,24 +36,24 @@
     </head>
     
     <body>
-        <h1>speak</h1>
+        <h1>simple TTS - parameterized</h1>
         
         <p>
             <label for="text">text:</label>
-            <textarea id="text" cols="60" rows="1">Javascript rules!</textarea>
+            <textarea id="text" cols="60" rows="3">Javascript rules!</textarea>
         </p>
         <p>
             <label for="lang">lang:</label>
             <select id="lang">
-                <option value="en">english</option>
+                <option value="en"   >english</option>
                 <option value="en-us">english (us)</option>
                 <option value="en-uk">english (uk)</option>
                 <option value="pt-pt">portuguese (pt)</option>
                 <option value="pt-br">portuguese (br)</option>
-                <option value="es">spanish</option>
-                <option value="fr">french</option>
-                <option value="de">german</option>
-                <option value="es">italian</option>
+                <option value="es"   >spanish</option>
+                <option value="fr"   >french</option>
+                <option value="de"   >german</option>
+                <option value="es"   >italian</option>
             </select>
         </p>
         
@@ -80,7 +80,7 @@
 
         <p>
             <label for="clear">clear:</label>
-            <input type="checkbox" id="clear" checked="checked" />
+            <input type="checkbox" id="clear" />
         </p>
         <p>
             <button id="read">read</button>
@@ -104,14 +104,12 @@
 
             readEl.setAttribute('disabled', 'disabled');
 
-            var o = speak({
-                text:       text,
+            var o = speak(text, {
                 lang:       lang,
                 amplitude:  amplitude,
                 pitch:      pitch,
                 speed:      speed,
                 wordgap:    wordgap,
-                autoplay:   true,
                 onReady:    function() {
                     console.log('ready...');
                 },

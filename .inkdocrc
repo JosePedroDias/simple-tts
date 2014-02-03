@@ -1,8 +1,10 @@
 {
     "outputDir":  ".",
-    "sourceDir":  "static/js",
+    "sourceDir":  ".",
     "sourceFiles": [
-        "*"
+        "lib/*.js",
+        "static/js/*.js",
+        "*.js"
     ],
     "template": "markdown",
     "markupFile": "API.md",
