@@ -1,6 +1,6 @@
 {
   "name": "simple-tts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "simple TTS API via espeak",
   "main": "lib/simple-tts.js",
   "repository": {
