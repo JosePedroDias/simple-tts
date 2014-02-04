@@ -1,3 +1,23 @@
+# intro
+
+## what's this for?
+
+Wrote this module to expose a simple API for speech generation from a given text. The adopted approach is to make use of the [espeak TTS engine](http://espeak.sourceforge.net/). Espeak is small, free and the results are crude, but supports many languages (run `espeak --voices` to chec k the ones available in your machine) and is enough for some scenarios. Later on I may offer alternative engines support (you want to help out?).
+
+
+## why not use X instead?
+
+You can use browser APIs for Chrome, Safari and such, if available. You can also use third-party web services for TTS. The point here is that you keep the dependency on your side, at the server level. Currently espeak can be run in browsers but that's heavy on CPU and memory - using this approach you request the text's speech and get back an encoded mp3/ogg of the generated audio sample.
+
+
+## helping out
+
+I'm by no means an expert in TTS usage. Feel free to contribute with optimizations, sample usages of alternate engines and/or pull requests of changes to make this work in additional OSs. I've marked this linux-only because I didn't have the chance to try it out in different environments and because I figured out loads of servers run a debian-like flavour of linux anyway.
+
+
+----
+
+
 # for direct node usage
 
 ## install dependencies
